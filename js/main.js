@@ -24,7 +24,7 @@ return entrar
 if(login()){
 	
 	do{
-		let nuevonombre = prompt("Nuevo nombre")
+		let nuevonombre = prompt("Nombre del Alumno")
 		
 	if(nuevonombre != null && nuevonombre !=""){
 		 nota1 = parseInt(prompt("Nota del primer parcial"))
@@ -32,16 +32,16 @@ if(login()){
 		
 			nota2 = parseInt(prompt("Nota del segundo parcial"))
 				if(nota2 >0 && nota2<=10){
-					nombre = nombre + "\n" + nuevonombre + " Primer parcial " + nota1 + " Segundo parical " + nota2 
+					nombre = nombre + "\n" + nuevonombre + " Primer parcial, " + nota1 + " Segundo parical " + nota2 
 			
 					alert(nombre)
 					resultado = (nota1 + nota2) /2
 					if(resultado>=6)
 					{
-						let aprobado = nuevonombre + " Esta aprobado su promedio es de: " + resultado
+						let aprobado = nuevonombre + " Aprobado!! \nSu promedio final es: " + resultado
 						alert(aprobado)
 					}else{
-						let desaprobado = nuevonombre + " Esta desaprobado su promedio es de: " + resultado
+						let desaprobado = nuevonombre + " Desaprobado \nSu promedio final es: " + resultado
 						alert(desaprobado)
 					}
 				}else {alert("Ingresaste mal la segunda nota")}
@@ -52,8 +52,8 @@ if(login()){
 		
 	
 		}else{
-		let pregunta = prompt("Desea agregar nombre? \n-Si \n-No")
-		if(pregunta == "si"){
+		let pregunta = prompt("¿Desea agregar otro alumno? \n-Si \n-No")
+		if(pregunta == "si" || pregunta =="Si"){
 		nuevonombre
 	}else {
 		
@@ -67,4 +67,7 @@ if(login()){
 
 
 }
+
+
+
 
