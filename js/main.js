@@ -1,6 +1,6 @@
 let continuar = true
 let resultado
-/*let profesor = "Franco Magistrati"
+let profesor = "Franco Magistrati"
 function login (){
 	let ingresar = prompt("Ingresa el nombre del profesor")
 
@@ -18,7 +18,7 @@ return
 
 }
 
-if(login()){*/
+if(login()){
 
 
 class Alumno{
@@ -107,4 +107,4 @@ alert("Hasta luego!!")
 
 }while(continuar)
 console.log(alumnos)
-//}
+}
