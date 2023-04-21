@@ -5,16 +5,16 @@ function login (){
 	let ingresar = prompt("Ingresa el nombre del profesor")
 
 	if(ingresar === "Franco Magistrati")
-	{
+	{	
 		alert("Bienvenido " + profesor)
-
+		continuar = true
 
 	}else{
 		alert("Profesor incorrecto")
-		return false
+		return continuar = false
 		
 	}
-return 
+return continuar = true
 
 }
 
