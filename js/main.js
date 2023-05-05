@@ -1,110 +1,203 @@
-let continuar = true
-let resultado
-let profesor = "Franco Magistrati"
-function login (){
-	let ingresar = prompt("Ingresa el nombre del profesor")
+let productoZapatillas = document.getElementById("productoZapatilla")
+let carrito =[]
+const carritodecompras = document.getElementById("carritodecompras")
+const totalCarrito = document.getElementById("TotalCarrito")
+const iconoCarrito = document.getElementById("iconoCarrito")
+const botonVaciarCarrito = document.querySelector('#boton-vaciar');
 
-	if(ingresar === "Franco Magistrati")
-	{	
-		alert("Bienvenido " + profesor)
-		continuar = true
 
-	}else{
-		alert("Profesor incorrecto")
-		return continuar = false
+const zapatillas = [
+				{id:1, nombre: 'Nike Zoom Freak 4 "NRG Lightning"',img:"img/nike.png" , precio: 78990},
+				{id:2, nombre: 'Adidas DON issue 3 "Christmas"', img:"img/adidas.png" , precio: 69000},
+				{id:3, nombre: 'Under Armour Spawn 3 "Electric Blue"', img:"img/underarmor.png" , precio: 59000},
+				{id:4, nombre: 'Puma RS Dreamer J Cole "Lime Green"', img: "img/puma.jpg" , precio: 58000},
+				{id:5, nombre: 'Nike Kyrie Flytrap 6 "Black Ice"', img:"img/nike2.png" , precio: 67900},
+
+]
+
+function mostrarMensaje(){
+	Swal.fire({
+		position: 'top-end',
+		icon: 'success',
+		title: 'Agregaste el producto',
+		showConfirmButton: false,
+		timer: 1500
+	  })
+}
+
+
+function removerDelCarrito(id) {
+    carrito = carrito.filter((item) => item.id !== id);
+    const productoAgregado = document.getElementById(id);
+    if (productoAgregado) {
+        productoAgregado.remove();
+    }
+    const total = carrito.reduce((acumulador, el) => acumulador += el.precio * el.cantidad, 0);
+    totalCompra.innerHTML = `Total: ${total}`;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+  
+function losProductos(){
+	zapatillas.forEach((item) => {
+		const contendor = document.createElement("div");
+		contendor.className = "card cartas";
+		const card1 = document.createElement("div");
+		card1.className = "card-body cartas2"
+		const titulo = document.createElement('h5');
+		titulo.className = "card-title"
+		titulo.textContent = item.nombre;	
+		const precio = document.createElement('p');
+		precio.className = "card-text precio";
+		precio.innerHTML = `$ ${item.precio}`;
 		
-	}
-return continuar = true
+		const img = document.createElement("img")
+		img.src = `${item.img}`
+		img.className = "imgZapatillas"
 
-}
+        const boton= document.createElement('button');
+        boton.textContent = 'Agregar';
+	boton.setAttribute("data-bs-toggle","modal" );
+boton.setAttribute("data-bs-target","#exampleModal" );
+        boton.setAttribute('marcador', item.id);
+boton.className = "botonAgregar";
+		boton.addEventListener('click', agregarAlCarrito)
 
-if(login()){
 
 
-class Alumno{
-	constructor(nombre, nota1, nota2){
-			this.nombre = nombre
-			this.nota1 = nota1
-			this.nota2 = nota2
-			}
-}
 
-const alumnos= []
-do{
-let opciones = prompt("Ingresa la opcion que desees \n1-Agregar Alumno \n2-Eliminar ultimo Alumno \n3-Ver alumnos \n4-Ver promedio del Alumno \n5-Ver todos los alumnos \n6-Salir")
 
-if(opciones === "1"){
+
+
+		function agregarAlCarrito(){
+			mostrarMensaje();
+			const itemRepetido = carrito.find((carritoItem) => carritoItem.id === item.id);
+			
+			
+			//console.log(carrito)
+			if(itemRepetido){
+				carrito = carrito.map((carritoItem) => {
+					if(carritoItem.id === item.id)
+					{
+						carritoItem.cantidad += 1;
+						const productoAlCarrito = document.getElementById(carritoItem.id);
+						console.log(productoAlCarrito)
+						
+						productoAlCarrito.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad: ${carritoItem.cantidad} - Item: ${carritoItem.nombre} - Precio Total: $${carritoItem.precio * carritoItem.cantidad}`
+						
+const botonRemover = document.createElement('button');
+botonRemover.textContent = 'X';
+botonRemover.setAttribute('marcador', item.id);
+botonRemover.className = "remover"
+botonRemover.addEventListener('click', () => {
+    removerDelCarrito(item.id);							
+										
+});
+productoAlCarrito.appendChild(botonRemover);
+
+					}
+					return carritoItem
+
+				}
+				)
+			}else{
+				const nuevoItem = {...item, cantidad : 1}
+				const productoAgregado = document.createElement("p");
+				
+				productoAgregado.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad: ${nuevoItem.cantidad} - Item: ${nuevoItem.nombre} - Precio Total: $${nuevoItem.precio} `;
+				productoAgregado.id = item.id;
+				carrito = [...carrito, nuevoItem];
+				carritodecompras.appendChild(productoAgregado)
+				
+				
+botonVaciarCarrito.addEventListener("click", vaciarCarrito);
+function vaciarCarrito() {
+	carrito = [];
+	productoAgregado.innerHTML = ""
+	totalCompra.innerHTML = "Total: $0";
+	localStorage.setItem("carrito", JSON.stringify(carrito));
+						}
+						
+const botonRemover = document.createElement('button');
+botonRemover.textContent = 'X';
+botonRemover.setAttribute('marcador', item.id);
+botonRemover.className = "remover"
+botonRemover.addEventListener('click', () => {
+    removerDelCarrito(item.id);
+});
+productoAgregado.appendChild(botonRemover);
+
+				}
+				//console.log(carrito)
+				const total = carrito.reduce ((acumulador, el) => acumulador += el.precio*el.cantidad, 0)
+				totalCompra.innerHTML = `Total: $${total}`;
+
+localStorage.setItem('carrito', JSON.stringify(carrito));
+
+
+
+
+
+
+		}	
+		
 	
-let ingresaAlumno = {}
-ingresaAlumno.nombre = prompt("Ingresa nombre del Alumno").trim()
-if(ingresaAlumno.nombre)
-{
-	let notaIngresada1 = parseFloat(prompt("Ingresa nota 1"))
-	if(!isNaN(notaIngresada1) && notaIngresada1 <= 10 && notaIngresada1 >0){
-	let notaIngresada2 = parseFloat(prompt("Ingresa nota 2"))
-	if(!isNaN(notaIngresada2) && notaIngresada2 <= 10 && notaIngresada2 >0){
-		alumnos.push(new Alumno(ingresaAlumno.nombre, notaIngresada1, notaIngresada2))
-		alert("Estudiante ingresado correctamente")
-		resultado = (notaIngresada1 + notaIngresada2) /2
-	}else{alert("Ingresaste mal la segunda nota")}
 
-}else{alert("Ingresaste mal la primer nota")}
-}
 
-}else if(opciones === "2"){
-	if(alumnos.length === 0)
-{
-alert("No hay alumnos cargados")
-}else{
-alumnos.pop()
-alert("Se elemino el alumno")
-}
-}else if(opciones === "3"){
-	if(alumnos.length === 0){
-		alert("No hay alumnos cargados")
-	}else{	
-		let nombreCargado = prompt("Que alumno buscas?")
+
+		card1.appendChild(titulo)
+		card1.appendChild(img)
+		card1.appendChild(precio)
+		card1.appendChild(boton)
+		contendor.appendChild(card1)
+
+		productoZapatillas.appendChild(contendor)
+
+	}
 	
-
-	const busqueda = alumnos.find((el) => el.nombre === nombreCargado)
 	
-
-	console.log(busqueda)
-		if(busqueda == undefined){
-		alert("No existe el alumno")
-	}else{
-		alert("Alumno " + busqueda.nombre + " Nota 1: " + busqueda.nota1 + " Nota 2: " + busqueda.nota2)}
-	}
-
-
-
-}else if(opciones === "4"){
-	if(alumnos.length === 0){
-		alert("No hay alumnos cargados")
-	}else{	
-	nombreCargado = prompt("Que alumno buscas?")	
-	busqueda = alumnos.find((el) => el.nombre === nombreCargado)
-	console.log(busqueda)
-		if(busqueda == undefined){
-		alert("No existe el alumno")
-	}else{
-		if(resultado >= 6){
-			alert("Alumno " + busqueda.nombre + " Promedio " + Math.ceil(resultado) + " Aprobado")}
-	else{alert("Alumno " + busqueda.nombre + " " + busqueda.apellido + " Promedio " + Math.ceil(resultado) + " Desaprobado")}
-	}
-	}
-}else if(opciones === "5"){
-
-
-}else if(opciones === "6"){
-
-alert("Hasta luego!!")
-	continuar = false
-
-
-}else{alert("No es correcta la opcion")}
-
-
-}while(continuar)
-console.log(alumnos)
+	)
 }
+
+
+
+
+
+
+const carritoEnStorage = localStorage.getItem('carrito');
+if (carritoEnStorage) {
+    carrito = JSON.parse(carritoEnStorage);
+    carrito.forEach((item) => {
+        const productoAgregado = document.createElement("p");
+        productoAgregado.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad: ${item.cantidad} - Item: ${item.nombre} - Precio Total: $${item.precio * item.cantidad} `;
+        productoAgregado.id = item.id;
+        carritodecompras.appendChild(productoAgregado);
+
+		botonVaciarCarrito.addEventListener("click", vaciarCarrito);
+
+		function vaciarCarrito() {
+		  carrito = [];
+		  productoAgregado.innerHTML = ""
+		  totalCompra.innerHTML = "Total: $0";
+		  localStorage.setItem("carrito", JSON.stringify(carrito));
+		}
+
+		
+			const botonRemover = document.createElement('button');
+botonRemover.textContent = 'X';
+botonRemover.setAttribute('marcador', item.id);
+botonRemover.className = "remover"
+botonRemover.addEventListener('click', () => {
+    removerDelCarrito(item.id);
+});
+productoAgregado.appendChild(botonRemover);
+
+    });
+				const total = carrito.reduce ((acumulador, el) => acumulador += el.precio*el.cantidad, 0)
+				totalCompra.innerHTML = `Total: $${total}`;
+
+
+}
+
+
+
+losProductos();
