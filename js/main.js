@@ -3,7 +3,11 @@ let carrito =[]
 const carritodecompras = document.getElementById("carritodecompras")
 const totalCarrito = document.getElementById("TotalCarrito")
 const iconoCarrito = document.getElementById("iconoCarrito")
+const filtroNike = document.getElementById("filtroNike")
 const botonVaciarCarrito = document.querySelector('#boton-vaciar');
+const filtroMarca = document.getElementById("filtroMarca");
+
+
 
 
 const zapatillas = [
@@ -14,6 +18,8 @@ const zapatillas = [
 				{id:5, nombre: 'Nike Kyrie Flytrap 6 "Black Ice"', img:"img/nike2.png" , precio: 67900},
 
 ]
+  
+
 
 function mostrarMensaje(){
 	Swal.fire({
@@ -63,7 +69,44 @@ boton.className = "botonAgregar";
 		boton.addEventListener('click', agregarAlCarrito)
 
 
-
+		filtroNike.addEventListener('click', () => {
+			const filtro = zapatillas.filter((el) => el.nombre.includes("Nike"))
+		
+			productoZapatillas.innerHTML = '';
+		filtro.forEach((item) =>{
+		const contendor = document.createElement("div");
+				contendor.className = "card cartas";
+				const card1 = document.createElement("div");
+				card1.className = "card-body cartas2"
+				const titulo = document.createElement('h5');
+				titulo.className = "card-title"
+				titulo.textContent = item.nombre;	
+				const precio = document.createElement('p');
+				precio.className = "card-text precio";
+				precio.innerHTML = `$ ${item.precio}`;
+				
+				const img = document.createElement("img")
+				img.src = `${item.img}`
+				img.className = "imgZapatillas"
+		
+				const boton= document.createElement('button');
+				boton.textContent = 'Agregar';
+			boton.setAttribute("data-bs-toggle","modal" );
+		boton.setAttribute("data-bs-target","#exampleModal" );
+				boton.setAttribute('marcador', item.id);
+		boton.className = "botonAgregar";
+				boton.addEventListener('click', agregarAlCarrito)
+		
+		
+				card1.appendChild(titulo)
+				card1.appendChild(img)
+				card1.appendChild(precio)
+				card1.appendChild(boton)
+				contendor.appendChild(card1)
+		 productoZapatillas.appendChild(contendor);
+		})
+			
+		});
 
 
 
@@ -156,6 +199,9 @@ localStorage.setItem('carrito', JSON.stringify(carrito));
 	
 	
 	)
+
+
+	
 }
 
 
