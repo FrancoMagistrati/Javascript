@@ -9,10 +9,11 @@ const btnFiltro = document.querySelectorAll('.botonFiltro');
 
 window.addEventListener("load", function() {
   const loader = document.getElementById("loader");
-  loader.style.display = "none";
+
 });
 
 
+  
 
 /*const zapatillas = [
 				{id:1, nombre: 'Nike Zoom Freak 4 "NRG Lightning"',img:"img/nike.png" , precio: 78990, marca:"nike"},
@@ -64,7 +65,7 @@ function losProductos(zapatillas){
 	fetch('./data/zapatillas.json')
     .then(response => response.json())
     .then(data => {
-      zapatillas = data;
+		zapatillas = data;
       productoZapatillas.innerHTML = "";
       zapatillas.forEach((item) => {
         const contendor = document.createElement("div");
@@ -114,15 +115,47 @@ function filtradoProductos(e){
 if(e.target.id === "todos"){
 losProductos();
 }else{
-	productoZapatillas.innerHTML = "";
+	
 	fetch('./data/zapatillas.json')
     .then(response => response.json())
-    .then(data => {
-      zapatillas = data;
+    .then(zapatillas => {
        const arrayFiltrado = zapatillas.filter((el) => el.marca === e.target.id);
 	  console.log(arrayFiltrado)
+	  productoZapatillas.innerHTML = "";
+	  arrayFiltrado.forEach((item) => {
+        const contendor = document.createElement("div");
+		contendor.className = "card cartas";
+		const card1 = document.createElement("div");
+		card1.className = "card-body cartas2"
+		const titulo = document.createElement('h5');
+		titulo.className = "card-title"
+		titulo.textContent = item.nombre;	
+		const precio = document.createElement('p');
+		precio.className = "card-text precio";
+		precio.innerHTML = `$ ${item.precio}`;
+		
+		const img = document.createElement("img")
+		img.src = `${item.img}`
+		img.className = "imgZapatillas"
 
-	  losProductos(arrayFiltrado);
+		const boton= document.createElement('button');
+		boton.textContent = 'Agregar';
+	boton.setAttribute("data-bs-toggle","modal" );
+boton.setAttribute("data-bs-target","#exampleModal" );
+		boton.setAttribute('marcador', item.id);
+boton.className = "botonAgregar";
+boton.addEventListener('click', () => agregarAlCarrito(item));
+
+
+
+		card1.appendChild(titulo)
+		card1.appendChild(img)
+		card1.appendChild(precio)
+		card1.appendChild(boton)
+		contendor.appendChild(card1)
+
+		productoZapatillas.appendChild(contendor)
+      });
     })
     .catch(error => {
       console.log(error);
@@ -253,35 +286,7 @@ productoAgregado.classList.add("contenedorCarrito");
 		botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 		botonComprarCarrito.addEventListener("click", comprarCarrito);
 
-		function vaciarCarrito() {
-			if (carrito.length === 0) {
-				Swal.fire('El carrito esta vacio');
-				return;
-			  }
-			Swal.fire({
-				title: '¿Estás seguro?',
-				text: "Se borrara todo",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Si'
-			  }).then((result) => {
-				if (result.isConfirmed) {
-					carrito = [];
-					productoAgregado.innerHTML = ""
-					totalCompra.innerHTML = "Total: $0";
-					localStorage.setItem("carrito", JSON.stringify(carrito));
-				  Swal.fire(
-					'Borrado',
-					'El carrito fue vaciado',
-					'success'
-				  )
-				}
-			  })
-
-		}
-
+	
 		
 			const botonRemover = document.createElement('button');
 botonRemover.textContent = 'X';
