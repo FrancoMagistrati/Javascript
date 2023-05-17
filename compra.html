@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,34 +10,13 @@
    
 </head>
 <body>
-  <div id="loader" class="loader"></div>
-
   <header>
     <nav class="navbar ">
       <div class="container-fluid carroIcono">
       <a href="index.html"><img src="img/logo.png" alt="logo" class="logo"></a>
-        <button id="carroIcono" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <img src="img/carrito.png" alt="carrito" class="">
-        </button>
+        
         <div class="offcanvas offcanvas-end bodyCarrito" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-    
-          <div class="offcanvas-body cuerpo">
-     
-    <div id="carritodecompras">
-    
-            <div id="TotalCarrito">
-                <p id="totalCompra"></p>
-            </div>
-           
-        </div>
-    
-        <button type="button" class="btn btn-danger" id="boton-vaciar">Vaciar</button>
-        <a href="compra.html"><button type="button" class="btn btn-success" id="boton-comprar">Ir a comprar</button></a>
-          
-    
-          
-    
-      </div>
+ 
     </nav>
   
   </header>
@@ -47,21 +25,15 @@
 
 
 <main>
-<div class="d-grid gap-2 d-md-flex justify-content-md-center contenedorBotones">
-  <button class="botonFiltro botonFiltro2 raise " id="nike">Nike</button>
-  <button class="botonFiltro botonFiltro2 raise" id="adidas">Adidas</button>
-  <button class="botonFiltro botonFiltro2 raise"  id="under">Under Armor</button>
-  <button class="botonFiltro botonFiltro2 raise"  id="puma">Puma</button>
-  <button class="botonFiltro raisee"  id="todos">Eliminar Filtro</button>
-</div>
-    <div class="card-group" id="productoZapatilla" >
-        
-
-   
-
-
+    <div id="carritodecompras">
+    
+        <div id="TotalCarrito">
+            <p id="totalCompra"></p>
+        </div>
+       
     </div>
-   
+    <button type="button" class="btn btn-danger" id="boton-vaciar">Vaciar</button>
+    <button type="button" class="btn btn-success" id="boton-comprar">Comprar</button>
 </main>
 
 
@@ -84,7 +56,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="./js/main.js"></script>
+    <script src="js/main.js"></script>
     
 </body>
 </html>
