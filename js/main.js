@@ -14,14 +14,14 @@ window.addEventListener("load", function() {
 
 
 
-const zapatillas = [
+/*const zapatillas = [
 				{id:1, nombre: 'Nike Zoom Freak 4 "NRG Lightning"',img:"img/nike.png" , precio: 78990, marca:"nike"},
 				{id:2, nombre: 'Adidas DON issue 3 "Christmas"', img:"img/adidas.png" , precio: 69000, marca:"adidas"},
 				{id:3, nombre: 'Under Armour Spawn 3 "Electric Blue"', img:"img/underarmor.png" , precio: 59000, marca:"under"},
 				{id:4, nombre: 'Puma RS Dreamer J Cole "Lime Green"', img: "img/puma.jpg" , precio: 58000, marca:"puma"},
 				{id:5, nombre: 'Nike Kyrie Flytrap 6 "Black Ice"', img:"img/nike2.png" , precio: 67900, marca:"nike"},
 
-]
+]*/
 
 
 
@@ -112,11 +112,22 @@ btn.addEventListener('click', filtradoProductos)
 
 function filtradoProductos(e){
 if(e.target.id === "todos"){
-losProductos(zapatillas);
+losProductos();
 }else{
-const arrayFiltrado = zapatillas.filter((el) => el.marca === e.target.id);
-console.log(arrayFiltrado)
-losProductos(arrayFiltrado);
+	productoZapatillas.innerHTML = "";
+	fetch('./data/zapatillas.json')
+    .then(response => response.json())
+    .then(data => {
+      zapatillas = data;
+       const arrayFiltrado = zapatillas.filter((el) => el.marca === e.target.id);
+	  console.log(arrayFiltrado)
+
+	  losProductos(arrayFiltrado);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
 
 }
 
@@ -322,4 +333,4 @@ function comprarCarrito() {
 
 
 
-losProductos(zapatillas);
+losProductos();
