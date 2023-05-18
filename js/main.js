@@ -7,22 +7,95 @@ const botonVaciarCarrito = document.querySelector('#boton-vaciar');
 const botonComprarCarrito = document.querySelector('#boton-comprar');
 const btnFiltro = document.querySelectorAll('.botonFiltro');
 
-window.addEventListener("load", function() {
-  const loader = document.getElementById("loader");
+function vaciarCarrito() {
+	if (carrito.length === 0) {
+	Swal.fire({
+      title: 'Carrito vacío',
+      text: 'No hay productos en el carrito',
+      icon: 'warning',
+      confirmButtonText: 'Aceptar',
+confirmButtonColor: '#e05c26',
+background: '#fff url(/img/basquet.jpg)',
+    });
+return;
+	  }
+	Swal.fire({
+		title: '¿Estás seguro?',
+		text: "Se borrara todo",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si!'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			carrito.forEach((item) => {
+				const productoAgregado = document.getElementById(item.id);
+				if (productoAgregado) {
+					productoAgregado.remove();
+				}
+			});
+			
+			carrito = [];
+			totalCompra.innerHTML = "Total: $0";
+			localStorage.setItem("carrito", JSON.stringify(carrito));
+		  	Swal.fire(
+			'Borrado',
+			'El carrito fue vaciado',
+			'success'
+		  )
+		}
+	  })
 
-});
+}
 
 
-  
+function comprarCarrito() {
+if(carrito.length === 0){
+Swal.fire({
+      title: 'Carrito vacío',
+      text: 'No hay productos en el carrito',
+      icon: 'warning',
+      confirmButtonText: 'Aceptar',
+confirmButtonColor: '#e05c26',
+background: '#fff url(/img/basquet.jpg)',
+    });
+}else{
+Swal.fire({
+		title: 'Tu compra fue realizada.',
+		text: "Tu producto esta en camino",
+confirmButtonText: 'Aceptar',
+confirmButtonColor: '#e05c26',
 
-/*const zapatillas = [
-				{id:1, nombre: 'Nike Zoom Freak 4 "NRG Lightning"',img:"img/nike.png" , precio: 78990, marca:"nike"},
-				{id:2, nombre: 'Adidas DON issue 3 "Christmas"', img:"img/adidas.png" , precio: 69000, marca:"adidas"},
-				{id:3, nombre: 'Under Armour Spawn 3 "Electric Blue"', img:"img/underarmor.png" , precio: 59000, marca:"under"},
-				{id:4, nombre: 'Puma RS Dreamer J Cole "Lime Green"', img: "img/puma.jpg" , precio: 58000, marca:"puma"},
-				{id:5, nombre: 'Nike Kyrie Flytrap 6 "Black Ice"', img:"img/nike2.png" , precio: 67900, marca:"nike"},
+		imageUrl:'img/moto.png',
+ imageWidth: 48,
+  imageHeight: 48,
+  imageAlt: 'moto',
+		width: 600,
+		padding: '3em',
+		color: 'black',
+		background: '#fff url(/img/basquet.jpg)',
+		backdrop: `
+		  rgba(0,0,123,0.4)
+		   url("img/basquet.gif")
+		  left 
+		no-repeat
+		`
+	  })
 
-]*/
+	  carrito.forEach((item) => {
+		const productoAgregado = document.getElementById(item.id);
+		if (productoAgregado) {
+			productoAgregado.remove();
+		}
+	});
+	
+	carrito = [];
+	totalCompra.innerHTML = "Total: $0";
+	localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+	
+}
 
 
 
@@ -31,7 +104,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 3000,
+  timer: 1500,
   timerProgressBar: true,
   
   didOpen: (toast) => {
@@ -60,6 +133,9 @@ function removerDelCarrito(id) {
 	totalCompra.innerHTML = `Total: ${total}`;
 	localStorage.setItem('carrito', JSON.stringify(carrito));
 }
+
+
+	
 
 function losProductos(zapatillas){
 	fetch('./data/zapatillas.json')
@@ -124,7 +200,7 @@ losProductos();
 	  productoZapatillas.innerHTML = "";
 	  arrayFiltrado.forEach((item) => {
         const contendor = document.createElement("div");
-		contendor.className = "card cartas";
+		contendor.className = "card cartas contenedor-producto";
 		const card1 = document.createElement("div");
 		card1.className = "card-body cartas2"
 		const titulo = document.createElement('h5');
@@ -136,7 +212,7 @@ losProductos();
 		
 		const img = document.createElement("img")
 		img.src = `${item.img}`
-		img.className = "imgZapatillas"
+		img.className = "imgZapatillas  w-25"
 
 		const boton= document.createElement('button');
 		boton.textContent = 'Agregar';
@@ -153,7 +229,6 @@ boton.addEventListener('click', () => agregarAlCarrito(item));
 		card1.appendChild(precio)
 		card1.appendChild(boton)
 		contendor.appendChild(card1)
-
 		productoZapatillas.appendChild(contendor)
       });
     })
@@ -184,12 +259,11 @@ function agregarAlCarrito(item){
 				const productoAlCarrito = document.getElementById(carritoItem.id);
 				console.log(productoAlCarrito)
 				
-		productoAlCarrito.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad: ${carritoItem.cantidad} - Item: ${carritoItem.nombre} - Precio Total: $${carritoItem.precio * carritoItem.cantidad}`
+		productoAlCarrito.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad:${carritoItem.cantidad} - Item: ${carritoItem.nombre} - Precio Total: $${carritoItem.precio * carritoItem.cantidad}`
 				
 const botonRemover = document.createElement('button');
-botonRemover.textContent = 'X';
 botonRemover.setAttribute('marcador', item.id);
-botonRemover.className = "remover"
+botonRemover.className = "close-modal-button"
 botonRemover.addEventListener('click', () => {
 removerDelCarrito(item.id);							
 								
@@ -206,20 +280,19 @@ productoAlCarrito.appendChild(botonRemover);
 		const productoAgregado = document.createElement("p");
 productoAgregado.classList.add("contenedorCarrito");
 		
-		productoAgregado.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad: ${nuevoItem.cantidad} - Item: ${nuevoItem.nombre} - Precio Total: $${nuevoItem.precio} `;
+		productoAgregado.innerHTML = `<img src=${item.img} class ="imgCarrito"> Cantidad:${nuevoItem.cantidad} - Item: ${nuevoItem.nombre} - Precio Total: $${nuevoItem.precio} `;
 		productoAgregado.id = item.id;
 		carrito = [...carrito, nuevoItem];
 		carritodecompras.appendChild(productoAgregado)
 		
 		
-botonVaciarCarrito.addEventListener("click", vaciarCarrito);
+
 
 
 				
 const botonRemover = document.createElement('button');
-botonRemover.textContent = 'X';
 botonRemover.setAttribute('marcador', item.id);
-botonRemover.className = "remover"
+botonRemover.className = "close-modal-button"
 botonRemover.addEventListener('click', () => {
 removerDelCarrito(item.id);
 });
@@ -238,40 +311,7 @@ localStorage.setItem('carrito', JSON.stringify(carrito));
 
 
 }	
-function vaciarCarrito() {
-	if (carrito.length === 0) {
-		Swal.fire('El carrito esta vacio');
-		return;
-	  }
-	Swal.fire({
-		title: '¿Estás seguro?',
-		text: "Se borrara todo",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Si!'
-	  }).then((result) => {
-		if (result.isConfirmed) {
-			carrito.forEach((item) => {
-				const productoAgregado = document.getElementById(item.id);
-				if (productoAgregado) {
-					productoAgregado.remove();
-				}
-			});
-			
-			carrito = [];
-			totalCompra.innerHTML = "Total: $0";
-			localStorage.setItem("carrito", JSON.stringify(carrito));
-		  	Swal.fire(
-			'Borrado',
-			'El carrito fue vaciado',
-			'success'
-		  )
-		}
-	  })
 
-}
 
 const carritoEnStorage = localStorage.getItem('carrito');
 if (carritoEnStorage) {
@@ -284,14 +324,12 @@ productoAgregado.classList.add("contenedorCarrito");
 		carritodecompras.appendChild(productoAgregado);
 
 		botonVaciarCarrito.addEventListener("click", vaciarCarrito);
-		botonComprarCarrito.addEventListener("click", comprarCarrito);
 
 	
 		
 			const botonRemover = document.createElement('button');
-botonRemover.textContent = 'X';
 botonRemover.setAttribute('marcador', item.id);
-botonRemover.className = "remover"
+botonRemover.className = "close-modal-button"
 botonRemover.addEventListener('click', () => {
 	removerDelCarrito(item.id);
 });
@@ -304,38 +342,15 @@ productoAgregado.appendChild(botonRemover);
 
 }
 
-function comprarCarrito() {
-
-	Swal.fire({
-		title: 'CSdsadsadd.',
-		width: 600,
-		padding: '3em',
-		color: '#716add',
-		background: '#fff url(/img/basquet.jpg)',
-		backdrop: `
-		  rgba(0,0,123,0.4)
-		  url("/images/nyan-cat.gif")
-		  left top
-		  no-repeat
-		`
-	  })
-
-	  carrito.forEach((item) => {
-		const productoAgregado = document.getElementById(item.id);
-		if (productoAgregado) {
-			productoAgregado.remove();
-		}
-	});
-	
-	carrito = [];
-	totalCompra.innerHTML = "Total: $0";
-	localStorage.setItem("carrito", JSON.stringify(carrito));
-}
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  botonComprarCarrito.addEventListener("click", comprarCarrito);
+});
 
 
+botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 
 
 losProductos();
