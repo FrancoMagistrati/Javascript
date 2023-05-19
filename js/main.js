@@ -144,8 +144,10 @@ function losProductos(zapatillas){
 		zapatillas = data;
       productoZapatillas.innerHTML = "";
       zapatillas.forEach((item) => {
-        const contendor = document.createElement("div");
-		contendor.className = "card cartas";
+		const contendor = document.createElement("div");
+		contendor.className = "col cartas";
+		const contenedor2 = document.createElement("div");
+contenedor2.className ="card contenedorCard2"
 		const card1 = document.createElement("div");
 		card1.className = "card-body cartas2"
 		const titulo = document.createElement('h5');
@@ -166,16 +168,25 @@ boton.setAttribute("data-bs-target","#exampleModal" );
 		boton.setAttribute('marcador', item.id);
 boton.className = "botonAgregar";
 boton.addEventListener('click', () => agregarAlCarrito(item));
+boton.addEventListener('mouseover',() =>
+contenedor2.className ="card contenedorCard",
+);
+
+boton.addEventListener('mouseout',() =>
+contenedor2.className ="card contenedorCard2",
+);
 
 
+card1.appendChild(titulo)
+card1.appendChild(img)
+			card1.appendChild(precio)
+			card1.appendChild(boton)
+			
+			contenedor2.appendChild(card1)
+			contendor.appendChild(contenedor2)
 
-		card1.appendChild(titulo)
-		card1.appendChild(img)
-		card1.appendChild(precio)
-		card1.appendChild(boton)
-		contendor.appendChild(card1)
 
-		productoZapatillas.appendChild(contendor)
+			productoZapatillas.appendChild(contendor)
       });
     })
     .catch(error => {
@@ -190,6 +201,7 @@ btn.addEventListener('click', filtradoProductos)
 function filtradoProductos(e){
 if(e.target.id === "todos"){
 losProductos();
+productoZapatillas.classList.add("justify-content-between");
 }else{
 	
 	fetch('./data/zapatillas.json')
@@ -199,8 +211,10 @@ losProductos();
 	  console.log(arrayFiltrado)
 	  productoZapatillas.innerHTML = "";
 	  arrayFiltrado.forEach((item) => {
-        const contendor = document.createElement("div");
-		contendor.className = "card cartas contenedor-producto";
+		const contendor = document.createElement("div");
+		contendor.className = "col cartas";
+		const contenedor2 = document.createElement("div");
+contenedor2.className ="card contenedorCard2"
 		const card1 = document.createElement("div");
 		card1.className = "card-body cartas2"
 		const titulo = document.createElement('h5');
@@ -209,10 +223,11 @@ losProductos();
 		const precio = document.createElement('p');
 		precio.className = "card-text precio";
 		precio.innerHTML = `$ ${item.precio}`;
-		
+		productoZapatillas.classList.remove("justify-content-between");
+
 		const img = document.createElement("img")
 		img.src = `${item.img}`
-		img.className = "imgZapatillas  w-25"
+		img.className = "imgZapatillas"
 
 		const boton= document.createElement('button');
 		boton.textContent = 'Agregar';
@@ -221,15 +236,24 @@ boton.setAttribute("data-bs-target","#exampleModal" );
 		boton.setAttribute('marcador', item.id);
 boton.className = "botonAgregar";
 boton.addEventListener('click', () => agregarAlCarrito(item));
+boton.addEventListener('mouseover',() =>
+contenedor2.className ="card contenedorCard",
+);
+
+boton.addEventListener('mouseout',() =>
+contenedor2.className ="card contenedorCard2",
+);
+
+card1.appendChild(titulo)
+card1.appendChild(img)
+			card1.appendChild(precio)
+			card1.appendChild(boton)
+			
+			contenedor2.appendChild(card1)
+			contendor.appendChild(contenedor2)
 
 
-
-		card1.appendChild(titulo)
-		card1.appendChild(img)
-		card1.appendChild(precio)
-		card1.appendChild(boton)
-		contendor.appendChild(card1)
-		productoZapatillas.appendChild(contendor)
+			productoZapatillas.appendChild(contendor)
       });
     })
     .catch(error => {
