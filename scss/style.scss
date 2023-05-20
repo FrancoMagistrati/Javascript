@@ -152,19 +152,21 @@
         .footer2{
         background-color:#e05c26 !important;
         }
-        .raise {
-          
+        .raise
+       {
+        &:hover{       
+                     
 
-            &:focus {
-                box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-                  transform: translateY(-0.25em);
-                }
-                &:hover {
-                   
-                    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-                      transform: translateY(-0.25em);
-                    }
-           }      
+          box-shadow: 0 0.5em 0.5em -0.4em ;
+            transform: translateY(-0.25em);
+          }
+          &:focus{
+            box-shadow: 0 0.5em 0.5em -0.4em ;
+            transform: translateY(-0.25em);
+          
+          }
+
+        }
 
            .raisee {
             &:hover{       

@@ -115,12 +115,12 @@ body {
 .footer2 {
   background-color: #e05c26 !important; }
 
-.raise:focus {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+.raise:hover {
+  box-shadow: 0 0.5em 0.5em -0.4em;
   transform: translateY(-0.25em); }
 
-.raise:hover {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em;
   transform: translateY(-0.25em); }
 
 .raisee:hover {
