@@ -1,0 +1,217 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    }
+    
+    nav{
+    background:#6a6a6a;
+    }
+  body{
+  background-color:#000000 !important;
+  }
+    .imgZapatillas{
+    width:100%;
+    }
+    
+    .imgCarrito{
+    width:50px;
+    }
+    
+    .botonAgregar{
+    border-radius:50px;
+    
+    border:none;
+    padding:10px;
+    color: black;
+    background:#6a6a6a;
+    width:100%;
+    font-size:1.2vw;
+    transition: 0.3s;
+        &:hover{
+            background:#e05c26;
+            border:none;
+            color:white;
+            transition: 0.3s;
+        }
+    }
+
+    .precio{
+        text-align: center;
+        font-size:2vw;
+        }
+        
+        .cartas{
+        margin:10px;
+        margin-top:20px;
+        }
+        
+      .contenedorCard{
+      border:2px solid #e05c26;
+      
+      
+      
+      }
+      
+      .contenedorCard{
+      box-shadow: 0px 2px 23px 3px rgba(224,92,38,1);
+      transition: 0.3s;
+      }
+      
+      .contenedorCard2{
+        border:2px solid grey;
+        
+        }
+      
+      
+      .cartaFiltro{
+      width:19% !important;
+      }
+      
+      
+      
+        #carroIcono{
+            border:none;
+        }
+        #carroIcono img{
+            width: 100%;
+        }
+      
+        .remover{
+            border-radius: 50px;
+            width: 25px;
+            background-color: rgb(255, 255, 255);
+            color:rgb(247, 4, 4);
+      border:none;
+            transition: 0.3s;
+            &:hover{
+                background-color: rgb(247, 4, 4);
+                color:rgb(241, 241, 241);
+                transition: 0.3s;
+            }
+        }
+
+        .bodyCarrito{
+            width:44% !important;
+          
+        }
+        .bodyCarrito div{
+            padding: 0;
+            
+        }
+        #carritodecompras{
+            width: 100%;
+            
+        }
+      
+        #totalCompra{
+            font-size: 2vw;
+            background-color:#e05c26;
+            padding:10px;
+        }
+      
+      .cuerpo{
+      background:#6a6a6a;
+      }
+      
+      #boton-vaciar{
+      margin: 10px;
+      }
+      
+      
+      .logo{
+        width: 100%;
+      }
+      
+      .carroIcono a{
+        width: 15%;
+      }
+      
+      
+      
+      .botonFiltro{
+      background:none;
+      color:white;
+      border: 2px solid;
+      font: inherit;
+      line-height: 1;
+      margin: 0.5em;
+      padding: 1em 2em;
+      transition: 0.25s;
+      &:hover{
+        color: #e05c26;
+        }
+        &:focus{
+            color: #e05c26;
+            }
+      }
+
+      .footer{
+        background:#6a6a6a;
+        }
+        .footer2{
+        background-color:#e05c26 !important;
+        }
+        .raise {
+          
+
+            &:focus {
+                box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+                  transform: translateY(-0.25em);
+                }
+                &:hover {
+                   
+                    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+                      transform: translateY(-0.25em);
+                    }
+           }      
+
+           .raisee {
+            &:hover{       
+                     
+
+                box-shadow: 0 0.5em 0.5em -0.4em ;
+                  transform: translateY(-0.25em);
+                }
+
+           }
+
+
+           .contenedorCarrito{
+            background:#949292;
+            }
+            
+            
+            .close-modal-button {
+            position: relative;
+            bottom:6px;
+            margin-left:2px;
+            z-index: 10;
+            background-color: #fff;
+            border-radius: 4em;
+            height: 1.5em;
+            width: 1.5em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            &::before {
+                position: absolute;
+                left: 48%;
+                top: 50%;
+                font-family: fontAwesome;
+                content: "\f00d";
+                color: #000;
+                font-size: 1em;
+                transform: translate(-50%, -50%);
+                }
+                &:hover {
+                   &::before{
+                        color: #ba3242;
+                        transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+                        transform: translate(-50%, -48%) rotate(-0.25turn);
+                    }
+
+                    
+                    }
+
+            }
